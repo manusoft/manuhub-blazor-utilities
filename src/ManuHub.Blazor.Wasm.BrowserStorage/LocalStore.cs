@@ -28,7 +28,7 @@ internal class LocalStore(IJSRuntime jsRuntime) : BaseStore(jsRuntime), ILocalSt
         return await module.InvokeAsync<Dictionary<string, object>>("getAllLocalItems");
     }
 
-    public async ValueTask RemoveItemAsync(string key)
+    public async ValueTask DeleteAsync(string key)
     {
         if (string.IsNullOrEmpty(key))
             throw new ArgumentException($"'{nameof(key)}' cannot be null or empty.", nameof(key));

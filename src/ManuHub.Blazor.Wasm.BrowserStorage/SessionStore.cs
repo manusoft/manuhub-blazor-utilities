@@ -53,7 +53,7 @@ internal class SessionStore(IJSRuntime jsRuntime) : BaseStore(jsRuntime), ISessi
         return await module.InvokeAsync<Dictionary<string, object>>("getAllSessionItems");
     }
 
-    public async ValueTask RemoveItemAsync(string key)
+    public async ValueTask DeleteAsync(string key)
     {
         if (string.IsNullOrEmpty(key))
             throw new ArgumentException($"'{nameof(key)}' cannot be null or empty.", nameof(key));

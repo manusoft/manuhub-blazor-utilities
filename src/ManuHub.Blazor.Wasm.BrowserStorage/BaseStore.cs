@@ -9,7 +9,7 @@ public abstract class BaseStore : IAsyncDisposable
     public BaseStore(IJSRuntime jsRuntime)
     {
         ModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/ManuHub.Blazor.Wasm.BrowserStorage/browserStorage.js").AsTask());
+            "import", "./_content/BrowserStorage.Wasm/browserStorage.js").AsTask());
     }
     public async ValueTask DisposeAsync()
     {
