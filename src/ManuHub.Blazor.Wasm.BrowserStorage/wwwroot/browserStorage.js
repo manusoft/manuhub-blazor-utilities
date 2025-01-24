@@ -3,15 +3,13 @@
 export function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Convert days to milliseconds
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
 }
 
 export function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-        const [key, val] = cookie.split('=');
-        if (key === name) return decodeURIComponent(val);
-    }
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }
 
@@ -24,7 +22,7 @@ export function getAllCookies() {
     const result = {};
     for (const cookie of cookies) {
         const [key, val] = cookie.split('=');
-        result[key] = decodeURIComponent(val);
+        result[key] = val;
     }
     return result;
 }
