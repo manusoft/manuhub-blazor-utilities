@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+	<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<RootNamespace>ManuHub.Blazor.Wasm.BrowserStorage</RootNamespace>
+	<PackageId>BrowserStorage.Wasm</PackageId>
+	<Description>WasmBrowserStorage is a Razor library designed for browser storage management in WebAssembly (WASM) applications. This package provides easy-to-use implementations for managing data in the browser's cookie, session, and local storage.</Description>
+	<Copyright>Copyright © 2025 ManuHub</Copyright>
+	<Authors>Manojbabu</Authors>
+	<PackageTags>
+		Wasm, WebAssembly, Browser Storage, Cookie, Session, LocalStorage, Blazor, Razor, Async, .NET, Web Storage, Cross-platform, Client-side Storage, Blazor Storage, Persistent Storage, Blazor WebAssembly, Cookie Store, Session Store, Local Store, Storage Management
+	</PackageTags>
+	<PackageProjectUrl>https://github.com/manusoft/Mappy</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/manusoft/Mappy</RepositoryUrl>
+	<Icon>icon.png</Icon>
+	<PackageIcon>icon.png</PackageIcon>
+	<Version>1.0.0</Version>
+	<IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+	
+ <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+	<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+ </ItemGroup>
+
+ <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+	<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
+ </ItemGroup>
+
+ <ItemGroup>
+	<Content Include="icon.png" Pack="true" PackagePath="" />
+	<Content Include="LICENSE.txt" Pack="true" PackagePath="" />
+ </ItemGroup>
+	
+</Project>

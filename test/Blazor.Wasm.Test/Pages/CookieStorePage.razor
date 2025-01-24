@@ -1,0 +1,46 @@
+﻿@page "/cookie"
+@inject ICookieStore CookieStore
+
+<PageTitle>Cookie Store</PageTitle>
+
+<h1>Cookie Store</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="ClickAsync">Count</button>
+
+<hr />
+
+@if (contact != null)
+{
+    <p>Name: @contact.Name</p>
+    <p>Email: @contact.Email</p>
+}
+
+@code{
+    private int currentCount = 0;
+    private Contact? contact = new Contact();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            currentCount = await CookieStore.GetAsync<int>("Counter.Cookie");
+            contact = await CookieStore.GetAsync<Contact>("Contact.Cookie");
+            StateHasChanged();
+        }
+    }
+
+    private async void ClickAsync()
+    {
+        currentCount++;
+        await CookieStore.SetAsync<int>("Counter.Cookie", currentCount, 1);
+        await CookieStore.SetAsync<Contact>("Contact.Cookie", new Contact { Name = "John Wick", Email = "johnwick@gmail.com" }, 1);
+    }
+
+    private class Contact
+    {
+        public string Name { get; set; } = default!;
+        public string Email { get; set; } = default!;
+    }
+}

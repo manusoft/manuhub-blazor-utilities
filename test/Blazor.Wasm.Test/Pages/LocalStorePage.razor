@@ -1,0 +1,47 @@
+﻿@page "/local"
+@inject ILocalStore LocalStore
+
+<PageTitle>Local Store</PageTitle>
+
+<h1>Local Store</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="ClickAsync">Count</button>
+
+<hr />
+
+@if (contact != null)
+{
+    <p>Name: @contact.Name</p>
+    <p>Email: @contact.Email</p>
+}
+
+
+@code {
+    private int currentCount = 0;
+    private Contact? contact = new Contact();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            currentCount = await LocalStore.GetAsync<int>("Counter.Local");
+            contact = await LocalStore.GetAsync<Contact>("Contact.Local");
+            StateHasChanged();
+        }
+    }
+
+    private async void ClickAsync()
+    {
+        currentCount++;
+        await LocalStore.SetAsync<int>("Counter.Local", currentCount);
+        await LocalStore.SetAsync<Contact>("Contact.Local", new Contact { Name = "Marco Junior", Email = "marcojunior@gmail.com" });
+    }
+
+    private class Contact
+    {
+        public string Name { get; set; } = default!;
+        public string Email { get; set; } = default!;
+    }
+}

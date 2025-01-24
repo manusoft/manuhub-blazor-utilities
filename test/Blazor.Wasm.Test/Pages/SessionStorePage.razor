@@ -1,0 +1,46 @@
+﻿@page "/session"
+@inject ISessionStore SessionStore
+
+<PageTitle>Session Store</PageTitle>
+
+<h1>Session Store</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="ClickAsync">Count</button>
+
+<hr />
+
+@if (contact != null)
+{
+    <p>Name: @contact.Name</p>
+    <p>Email: @contact.Email</p>
+}
+
+@code{
+    private int currentCount = 0;
+    private Contact? contact = new Contact();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            currentCount = await SessionStore.GetAsync<int>("Counter.Session");
+            contact = await SessionStore.GetAsync<Contact>("Contact.Session");
+            StateHasChanged();
+        }
+    }
+
+    private async void ClickAsync()
+    {
+        currentCount++;
+        await SessionStore.SetAsync<int>("Counter.Session", currentCount);
+        await SessionStore.SetAsync<Contact>("Contact.Session", new Contact { Name = "James Bond", Email = "jamesbond@gmail.com" });
+    }
+
+    private class Contact
+    {
+        public string Name { get; set; } = default!;
+        public string Email { get; set; } = default!;
+    }
+}
