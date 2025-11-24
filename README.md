@@ -1,3 +1,5 @@
+![Static Badge](https://img.shields.io/badge/BrowserStorage.Wasm-red) ![NuGet Version](https://img.shields.io/nuget/v/BrowserStorage.Wasm) ![.NET](https://img.shields.io/badge/.NET-8%20%7C%209%20%7C%2010-blueviolet)
+
 # BrowserStorage.Wasm
 ![icon](https://github.com/user-attachments/assets/2182b6a4-8d06-4021-8837-af7a2d7e4556)
 
